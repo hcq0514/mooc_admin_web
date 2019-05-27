@@ -4,37 +4,21 @@
     <el-table
       :data="list"
       stripe style="width: 100%">
-      <el-table-column prop="siteId" label="站点ID" width="180">
+      <el-table-column  type="index" label="序号" >
       </el-table-column>
-      <el-table-column prop="pageId" label="页面ID" width="180">
+      <el-table-column prop="pageName" label="页面名称" >
       </el-table-column>
-      <el-table-column prop="pageName" label="页面名称" width="180">
+      <el-table-column prop="pageAliase" label="别名"  >
       </el-table-column>
-      <el-table-column prop="pageAliase" label="别名" width="180">
+      <el-table-column prop="pageWebPath" label="访问地址"  >
       </el-table-column>
-      <el-table-column prop="pageWebPath" label="访问地址" width="180">
+      <el-table-column prop="pagePhysicalPath" label="物理路径"  >
       </el-table-column>
-      <el-table-column prop="pageParameter" label="参数" width="180">
+      <el-table-column prop="pageType" label="页面类型（静态/动态）"  >
       </el-table-column>
-      <el-table-column prop="pagePhysicalPath" label="物理路径" width="180">
-      </el-table-column>
-      <el-table-column prop="pageType" label="类型（静态/动态）" width="180">
-      </el-table-column>
-      <el-table-column prop="pageTemplate" label="页面模版" width="180">
-      </el-table-column>
-      <el-table-column prop="pageHtml" label="页面静态化内容" width="180">
-      </el-table-column>
-      <el-table-column prop="pageStatus" label="状态" width="180">
-      </el-table-column>
-      <el-table-column prop="pageCreateTime" label="创建时间" width="180">
-      </el-table-column>
-      <el-table-column prop="templateId" label="模版id" width="180">
-      </el-table-column>
-      <el-table-column prop="pageParams" label="参数列表" width="180">
-      </el-table-column>
-      <el-table-column prop="htmlFileId" label="静态文件Id" width="180">
-      </el-table-column>
-      <el-table-column prop="dataUrl" label="数据Url" width="180">
+<!--      <el-table-column prop="pageStatus" label="状态"  >-->
+<!--      </el-table-column>-->
+      <el-table-column prop="pageCreateTime" label="创建时间"  >
       </el-table-column>
     </el-table>
     <el-pagination
