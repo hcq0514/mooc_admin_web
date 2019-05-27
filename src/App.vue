@@ -1,27 +1,25 @@
 <template>
   <div>
-      <router-view ></router-view>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-export default {
+  export default {
 
-  data() {
-    return {
-      name: 'app'
-    }
-  },
-  methods: {
-
+    data () {
+      return {
+        name: 'app'
+      }
     },
-  created: function(newPath) {
+    methods: {},
+    created: function (newPath) {
+    }
   }
-}
 </script>
 
 <style>
   * {
-    -webkit-user-select:text;
+    -webkit-user-select: text;
   }
 </style>
