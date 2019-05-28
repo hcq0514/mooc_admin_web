@@ -5,6 +5,10 @@ let sysConfig = require('@/../config/sysConfig')
 let apiUrl = sysConfig.xcApiUrlPre
 
 // 获取cmsPage列表
+export const getCmsPageById = (pageId) => {
+  return http.requestQuickGet('http://api.mooc.com/api/cms/cmsPage/get/' +pageId)
+}
+// 获取cmsPage列表
 export const searchCmsPageList = (page, size, params) => {
   return http.requestQuickGet('http://api.mooc.com/api/cms/cmsPage/list/' + page + '/' + size)
 }

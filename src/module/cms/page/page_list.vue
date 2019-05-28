@@ -29,8 +29,8 @@
       <el-table-column label="操作">
         <template slot-scope="scope">
           <el-button
-            size="mini"
-            @click="handleDelete(scope.$index, scope.row)">编辑
+            size="mini" type="text"
+            @click="handleUpdate(scope.row.pageId)">编辑
           </el-button>
           <el-button
             size="mini"
@@ -78,6 +78,15 @@
         this.params.page = page
         this.queryCmsPageList()
       },
+
+
+      handleUpdate (pageId) {
+        this.$router.push({
+          path: '/cms/page/update/' + pageId, query: {
+            pageId: pageId
+          }
+        })
+      },
       handleDelete (pageId) {
         //确认提交
         this.$confirm('确认删除?', '提示', {confirmButtonText: '确定', cancelButtonText: '取消', type: 'warning'})
@@ -86,10 +95,10 @@
               if (!res.success) {
                 //删除失败
                 this.$message({type: 'error', message: '删除失败，' + res.message})
-                this.queryCmsPageList();
+                this.queryCmsPageList()
               } else {
                 this.$message({type: 'success', message: '删除成功!'})
-                this.queryCmsPageList();
+                this.queryCmsPageList()
               }
             })
           })
