@@ -23,7 +23,7 @@
     <el-form-item label="页面名称" prop="pageName">
       <el-input v-model="form.pageName"></el-input>
     </el-form-item>
-    <el-form-item label="别名" prop="region">
+    <el-form-item label="别名" prop="pageAliase">
       <el-input v-model="form.pageAliase"></el-input>
     </el-form-item>
     <el-form-item label="访问路径" prop="pageWebPath">
@@ -39,7 +39,7 @@
     <el-form-item>
       <el-button type="primary" @click="submitForm('form')">立即创建</el-button>
       <el-button @click="resetForm('form')">重置</el-button>
-      <el-button>返回</el-button>
+      <el-button @click="go_back">返回</el-button>
     </el-form-item>
   </el-form>
 </template>
@@ -91,20 +91,35 @@
           this.pageTemplateList = value.queryResult.list
         })
       },
-      submitForm(formName) {
+      submitForm (formName) {
         //检验规则
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            cmsApi.addCmsPage(this.form)
+            //确认提交
+            this.$confirm('确认提交表单?', '提示', {confirmButtonText: '确定', cancelButtonText: '取消', type: 'warning'})
+              .then(() => {
+                cmsApi.addCmsPage(this.form).then(value => {
+                })
+                this.$message({type: 'success', message: '提交成功!'})
+                //重置表单
+                this.resetForm(formName)
+              })
           } else {
-            console.log('error submit!!');
-            return false;
+            return false
           }
-        });
+        })
       },
       //重置表单
-      resetForm(formName) {
-        this.$refs[formName].resetFields();
+      resetForm (formName) {
+        this.$refs[formName].resetFields()
+      },
+      go_back () {
+        this.$router.push({
+          path: '/cms/page/list', query: {
+            page: this.$route.query.page,
+            siteId: this.$route.query.siteId
+          }
+        })
       }
     },
     //钩子函数，一进来默认查询页面

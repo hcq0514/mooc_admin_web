@@ -1,6 +1,12 @@
 <template>
   <div>
     <el-button type="primary" size="small" @click="queryCmsPageList">查询</el-button>
+    <router-link class="mui-tab-item" :to="{path:'/cms/page/add/',query:{
+      page: this.params.page,
+      siteId: this.params.siteId}}">
+      <el-button type="primary" size="small">新增页面</el-button>
+
+    </router-link>
     <el-table
       :data="list"
       stripe style="width: 100%">
@@ -62,6 +68,10 @@
     //钩子函数，一进来默认查询页面
     mounted () {
       this.queryCmsPageList()
+    },
+    created () {
+      this.params.page = Number.parseInt(this.$route.query.page || 1)
+      this.params.siteId = this.$route.query.siteId || ''
     }
   }
 </script>
