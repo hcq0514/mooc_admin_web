@@ -98,11 +98,17 @@
             //确认提交
             this.$confirm('确认提交表单?', '提示', {confirmButtonText: '确定', cancelButtonText: '取消', type: 'warning'})
               .then(() => {
-                cmsApi.addCmsPage(this.form).then(value => {
+                cmsApi.addCmsPage(this.form).then(res => {
+                  console.log(res);
+                  if (!res.success) {
+                    //提交失败
+                    this.$message({type: 'error', message: '提交失败，' + res.message})
+                  }else {
+                    this.$message({type: 'success', message: '提交成功!'})
+                    //重置表单
+                    this.resetForm(formName)
+                  }
                 })
-                this.$message({type: 'success', message: '提交成功!'})
-                //重置表单
-                this.resetForm(formName)
               })
           } else {
             return false
