@@ -30,6 +30,12 @@
         <template slot-scope="scope">
           <el-button
             size="mini"
+            type="success"
+            @click="handlePreview(scope.row.pageId)">预览
+          </el-button>
+          <el-button
+            size="mini"
+            type="primary"
             @click="handleUpdate(scope.row.pageId)">编辑
           </el-button>
           <el-button
@@ -78,7 +84,9 @@
         this.params.page = page
         this.queryCmsPageList()
       },
-
+      handlePreview(pageId){
+        window.open('http://api.mooc.com/api/cms/cmsPage/preview/' + pageId)
+      },
 
       handleUpdate (pageId) {
         this.$router.push({
