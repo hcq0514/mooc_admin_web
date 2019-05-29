@@ -29,7 +29,7 @@
       <el-table-column label="操作">
         <template slot-scope="scope">
           <el-button
-            size="mini" type="text"
+            size="mini"
             @click="handleUpdate(scope.row.pageId)">编辑
           </el-button>
           <el-button
@@ -83,7 +83,8 @@
       handleUpdate (pageId) {
         this.$router.push({
           path: '/cms/page/update/' + pageId, query: {
-            pageId: pageId
+            pageId: pageId,
+            page: this.params.page
           }
         })
       },

@@ -14,7 +14,7 @@
       </el-select>
     </el-form-item>
     <el-form-item label="选择模版" prop="pageTemplate">
-      <el-select v-model="form.pageTemplate" placeholder="请选择模版">
+      <el-select v-model="form.templateId" placeholder="请选择模版">
         <el-option
           v-for="template in pageTemplateList"
           :key="template.templateId"
@@ -56,7 +56,7 @@
         form: {
           pageId: '',
           siteId: '',
-          pageTemplate: '',
+          templateId: '',
           pageName: '',
           pageAliase: '',
           pageWebPath: '',
@@ -69,7 +69,7 @@
           siteId: [
             {required: true, message: '请至少选择一个所属站点', trigger: 'change'}
           ],
-          pageTemplate: [
+          templateId: [
             {required: true, message: '请至少选择一个模版', trigger: 'change'}
           ],
           pageName: [
@@ -102,15 +102,14 @@
             //确认提交
             this.$confirm('确认提交表单?', '提示', {confirmButtonText: '确定', cancelButtonText: '取消', type: 'warning'})
               .then(() => {
-                cmsApi.addCmsPage(this.form).then(res => {
-                  console.log(res)
+                cmsApi.updateCmsPage(this.form).then(res => {
                   if (!res.success) {
-                    //提交失败
-                    this.$message({type: 'error', message: '提交失败，' + res.message})
+                    //更新失败
+                    this.$message({type: 'error', message: '更新失败，' + res.message})
                   } else {
-                    this.$message({type: 'success', message: '提交成功!'})
+                    this.$message({type: 'success', message: '更新成功!'})
                     //重置表单
-                    this.resetForm(formName)
+                    this.go_back()
                   }
                 })
               })
@@ -135,11 +134,11 @@
     //钩子函数，一进来默认查询页面
     created () {
       //页面参数通过路由传入，这里通过this.$route.params来获取
-      // this.form.pageId = this.$route.params.pageId
-      // //根据主键查询页面信息
-      cmsApi.getCmsPageById(12).then((res) => {
-        console.log(res)
+      this.form.pageId = this.$route.params.pageId
+      cmsApi.getCmsPageById(this.form.pageId).then((res) => {
         if (res.success) {
+          // //根据主键查询页面信息
+          console.log(res)
           this.form = res.cmsPage
         }
       })

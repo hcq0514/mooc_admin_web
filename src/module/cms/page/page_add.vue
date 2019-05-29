@@ -11,7 +11,7 @@
       </el-select>
     </el-form-item>
     <el-form-item label="选择模版" prop="pageTemplate">
-      <el-select v-model="form.pageTemplate" placeholder="请选择模版">
+      <el-select v-model="form.templateId" placeholder="请选择模版">
         <el-option
           v-for="template in pageTemplateList"
           :key="template.templateId"
@@ -52,7 +52,7 @@
       return {
         form: {
           siteId: '',
-          pageTemplate: '',
+          templateId: '',
           pageName: '',
           pageAliase: '',
           pageWebPath: '',
@@ -65,7 +65,7 @@
           siteId: [
             {required: true, message: '请至少选择一个所属站点', trigger: 'change'}
           ],
-          pageTemplate: [
+          templateId: [
             {required: true, message: '请至少选择一个模版', trigger: 'change'}
           ],
           pageName: [
@@ -99,7 +99,6 @@
             this.$confirm('确认提交表单?', '提示', {confirmButtonText: '确定', cancelButtonText: '取消', type: 'warning'})
               .then(() => {
                 cmsApi.addCmsPage(this.form).then(res => {
-                  console.log(res);
                   if (!res.success) {
                     //提交失败
                     this.$message({type: 'error', message: '提交失败，' + res.message})

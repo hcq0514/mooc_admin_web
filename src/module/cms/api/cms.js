@@ -17,6 +17,10 @@ export const addCmsPage = (params) => {
   return http.requestPost('http://api.mooc.com/api/cms/cmsPage/add', params)
   // return http.requestPostForm('http://api.mooc.com/api/cms/cmsPage/add',params)
 }
+// 修改cmsPage页面
+export const updateCmsPage = (params) => {
+  return http.requestPut('http://api.mooc.com/api/cms/cmsPage/update', params)
+}
 // 删除cmsPage
 export const deleteCmsPage = (pageId) => {
   return http.requestDelete('http://api.mooc.com/api/cms/cmsPage/delete/' + pageId)
