@@ -4,6 +4,7 @@ import Router from 'vue-router'
 // 导入路由规则
 import HomeRouter from '@/module/home/router'
 import CMSRouter from '@/module/cms/router'
+import CourseRouter from '@/module/course/router'
 
 Vue.use(Router)
 // 定义路由配置
@@ -14,4 +15,5 @@ let concat = (router) => {
 // 合并路由规则
 concat(HomeRouter) // 加入home模块的路由
 concat(CMSRouter) // 加入CMS模块的路由
+concat(CourseRouter) // 加入course模块的路由
 export default routes
