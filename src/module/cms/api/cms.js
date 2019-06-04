@@ -6,11 +6,12 @@ let apiUrl = sysConfig.xcApiUrlPre
 
 // 获取cmsPage列表
 export const getCmsPageById = (pageId) => {
-  return http.requestQuickGet('http://api.mooc.com/api/cms/cmsPage/get/' +pageId)
+  return http.requestQuickGet('http://api.mooc.com/api/cms/cmsPage/get/' + pageId)
 }
 // 获取cmsPage列表
 export const searchCmsPageList = (page, size, params) => {
-  return http.requestQuickGet('http://api.mooc.com/api/cms/cmsPage/list/' + page + '/' + size)
+  let query = querystring.stringify(params)
+  return http.requestQuickGet('http://api.mooc.com/api/cms/cmsPage/list/' + page + '/' + size + '/?' + query)
 }
 // 添加cmsPage页面
 export const addCmsPage = (params) => {

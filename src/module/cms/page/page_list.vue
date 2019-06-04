@@ -1,12 +1,20 @@
 <template>
   <div>
-    <el-button type="primary" size="small" @click="queryCmsPageList">查询</el-button>
-    <router-link class="mui-tab-item" :to="{path:'/cms/page/add/',query:{
+    <el-form :model="params">
+      页面Id:
+      <el-input size="mini" v-model="params.pageId" style="width: 200px;"></el-input>
+      页面别名:
+      <el-input size="mini" v-model="params.pageAliase" style="width: 200px;"></el-input>
+      站点Id:
+      <el-input size="mini" v-model="params.siteId" style="width: 200px;"></el-input>
+      <el-button type="primary" size="small" @click="queryCmsPageList(params)">查询</el-button>
+      <router-link class="mui-tab-item" :to="{path:'/cms/page/add/',query:{
       page: this.params.page,
       siteId: this.params.siteId}}">
-      <el-button type="primary" size="small">新增页面</el-button>
+        <el-button type="primary" size="small">新增页面</el-button>
+      </router-link>
+    </el-form>
 
-    </router-link>
     <el-table
       :data="list"
       stripe style="width: 100%">
@@ -16,12 +24,14 @@
       </el-table-column>
       <el-table-column prop="pageAliase" label="别名">
       </el-table-column>
+      <el-table-column prop="siteId" label="站点Id">
+      </el-table-column>
       <el-table-column prop="pageWebPath" label="访问地址">
       </el-table-column>
       <el-table-column prop="pagePhysicalPath" label="物理路径">
       </el-table-column>
-      <el-table-column prop="pageType" label="页面类型（静态/动态）">
-      </el-table-column>
+      <!--      <el-table-column prop="pageType" label="页面类型"  >-->
+      <!--      </el-table-column>-->
       <!--      <el-table-column prop="pageStatus" label="状态"  >-->
       <!--      </el-table-column>-->
       <el-table-column prop="pageCreateTime" label="创建时间">
@@ -68,13 +78,16 @@
         total: 50,
         params: {
           page: 1,//页码
-          size: 10//每页显示个数
+          size: 10,//每页显示个数
+          siteId: '',
+          pageAliase: '',
+          pageId: ''
         }
       }
     },
     methods: {
-      queryCmsPageList () {
-        cmsApi.searchCmsPageList(this.params.page, this.params.size).then((value) => {
+      queryCmsPageList (params) {
+        cmsApi.searchCmsPageList(this.params.page, this.params.size,params).then((value) => {
           this.total = value.queryResult.total
           this.list = value.queryResult.list
         })
@@ -84,7 +97,7 @@
         this.params.page = page
         this.queryCmsPageList()
       },
-      handlePreview(pageId){
+      handlePreview (pageId) {
         window.open('http://api.mooc.com/api/cms/cmsPage/preview/' + pageId)
       },
 
